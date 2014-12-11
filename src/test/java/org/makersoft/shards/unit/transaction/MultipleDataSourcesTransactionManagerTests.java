@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/org/makersoft/shards/unit/transaction/applicationContext.xml" })
-@TransactionConfiguration(transactionManager = "multiDataSourcesTransactionManager", defaultRollback = false)
+@TransactionConfiguration(transactionManager = "multiDataSourcesTransactionManager", defaultRollback = false) // defaultRollback = true 事物生效
 @ActiveProfiles("test")
 public class MultipleDataSourcesTransactionManagerTests {
 
@@ -32,7 +32,7 @@ public class MultipleDataSourcesTransactionManagerTests {
 	
 	@Test
 	@Transactional(rollbackFor={Exception.class,RuntimeException.class})
-	@Rollback
+	// @Rollback
 	public void testTransactionCommitAndRollback() throws Exception{
 
 		int affectedrows = jdbcTemplate_1.update("insert into maker_shards_user (id,username,password,age,gender) values (1,'makersoft','makersoft',23,1)");
